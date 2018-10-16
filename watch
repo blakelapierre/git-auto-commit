@@ -2,7 +2,6 @@
 
 echo "Watching..."
 
-
 inotifywait -m ./ -e CLOSE_WRITE |
   while read path action file; do
     echo "$path" "$action" "$file"

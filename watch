@@ -2,15 +2,25 @@
 
 BRANCH=${1:-master}
 
-echo "About to watch '$BRANCH'; please have inotifywait and git..."
+echo "  About to watch '$BRANCH'"
+echo "    please have inotifywait and git..."
+echo ""
 
-git checkout -b ${BRANCH} || git checkout ${BRANCH}
+git checkout -b ${BRANCH} 2> /dev/null
+
+git checkout ${BRANCH}
+
+git_stuff()
 
 inotifywait -m ./ -e CLOSE_WRITE |
   while read path action file; do
     echo "$path" "$action" "$file"
 
-    git add .
-    git commit --no-gpg-sign -m "auto-commit"
-    git push origin ${1:-master}
+    git_stuff()
   done
+
+git_stuff() {
+  git add .
+  git commit --no-gpg-sign -m "auto-commit"
+  git push origin ${BRANCH}
+}

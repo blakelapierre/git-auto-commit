@@ -4,7 +4,8 @@ BRANCH=${1:-master}
 
 echo "About to watch '$BRANCH'; please have inotifywait and git..."
 
-git checkout -b ${BRANCH}
+$(git checkout -b ${BRANCH})
+git checkout ${BRANCH}
 
 inotifywait -m ./ -e CLOSE_WRITE |
   while read path action file; do

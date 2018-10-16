@@ -8,4 +8,5 @@ inotifywait -m ./ -e CLOSE_WRITE |
 
     git add .
     git commit --no-gpg-sign -m "auto-commit"
+    git push origin master
   done

@@ -1,6 +1,10 @@
 #!/bin/sh
 
-echo "About to watch; please have inotifywait and git..."
+BRANCH=${1:-master}
+
+echo "About to watch '$BRANCH'; please have inotifywait and git..."
+
+git checkout ${BRANCH}
 
 inotifywait -m ./ -e CLOSE_WRITE |
   while read path action file; do

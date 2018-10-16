@@ -4,7 +4,7 @@ BRANCH=${1:-master}
 
 echo "About to watch '$BRANCH'; please have inotifywait and git..."
 
-git checkout -b ${BRANCH} > /dev/null
+git checkout -b ${BRANCH} &2> /dev/null
 
 git checkout ${BRANCH}
 

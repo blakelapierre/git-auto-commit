@@ -1,24 +1,24 @@
 #!/bin/sh
 
-BRANCH=${1:-autosave}
 
-echo "  About to watch '$BRANCH'"
+echo "  About to watch"
 echo "    please have inotifywait and git..."
 echo ""
 
 git_stuff () {
+  git checkout -b ${BRANCH} 2> /dev/null
+  git checkout ${BRANCH}
+
   git add .
   git commit --no-gpg-sign -m "auto-commit"
   git push origin ${BRANCH}
 }
 
-git checkout -b ${BRANCH} 2> /dev/null
 
-git checkout ${BRANCH}
 
 git_stuff
 
-inotifywait -m ./ -e CLOSE_WRITE |
+inotifywait -m ./ -e CLOSE_WRITE -e create |
   while read path action file; do
     echo "$path" "$action" "$file"
 

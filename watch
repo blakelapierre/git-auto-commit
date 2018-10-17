@@ -18,7 +18,7 @@ git_stuff () {
 
 git_stuff
 
-inotifywait -m ./ -e CLOSE_WRITE -e create |
+inotifywait -m ./ -e CLOSE_WRITE -e CREATE |
   while read path action file; do
     echo "$path" "$action" "$file"
 

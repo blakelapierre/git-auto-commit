@@ -13,7 +13,7 @@ checkout () {
 }
 
 commit () {
-  if [SUSPEND -eq 0]
+  if [ $SUSPEND -eq 0 ]
   then
     git add .
     git commit --no-gpg-sign -m "auto-commit"

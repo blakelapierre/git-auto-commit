@@ -13,12 +13,9 @@ checkout () {
 }
 
 commit () {
-  if [ $SUSPEND -eq 0 ]
-  then
-    git add .
-    git commit --no-gpg-sign -m "auto-commit"
-    git push origin ${BRANCH}
-  fi
+  git add .
+  git commit --no-gpg-sign -m "auto-commit"
+  git push origin ${BRANCH}
 }
 
 merge () {
@@ -47,8 +44,11 @@ commit
             ;;
 
          *)
-          echo "CCC committing"
-          commit
+          if [ $SUSPEND -eq 0 ]
+          then
+            echo "CCC committing"
+            commit
+          fi
             ;;
     esac
 

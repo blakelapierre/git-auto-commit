@@ -24,7 +24,8 @@ commit () {
 merge () {
   SUSPEND=1
   checkout master
-  git merge $BRANCH
+  git merge --no-gpg-sign $BRANCH
+  git push origin master
   checkout $BRANCH
   SUSPEND=0
 }

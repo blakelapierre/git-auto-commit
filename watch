@@ -20,7 +20,8 @@ commit () {
 checkout
 commit
 
-inotifywait -m ./ -e CLOSE_WRITE -e CREATE |
+#inotifywait -m ./ -e CLOSE_WRITE -e CREATE |
+(inotifywait -m ./ -e CLOSE_WRITE -e CREATE & cat) |
   while read path action file; do
     echo "$path" "$action" "$file"
 

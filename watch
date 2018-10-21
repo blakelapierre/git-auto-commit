@@ -1,7 +1,6 @@
 #!/bin/sh
 
 BRANCH=${1:-autosave}
-SUSPEND=0
 
 echo "  About to watch"
 echo "    please have inotifywait and git..."
@@ -38,17 +37,13 @@ commit
       ":m")
 
           echo "MMM merging"
-          SUSPEND=1
           merge
-          SUSPEND=0
             ;;
 
          *)
-          if [ $SUSPEND -eq 0 ]
-          then
-            echo "CCC committing $SUSPEND"
-            commit
-          fi
+          echo "CCC committing $SUSPEND"
+          commit
+
             ;;
     esac
 

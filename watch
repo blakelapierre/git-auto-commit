@@ -7,8 +7,8 @@ echo "    please have inotifywait and git..."
 echo ""
 
 checkout () {
-  git checkout -b ${BRANCH} 2> /dev/null
-  git checkout ${BRANCH}
+  git checkout -b ${1} 2> /dev/null
+  git checkout ${1}
 }
 
 commit () {
@@ -17,13 +17,26 @@ commit () {
   git push origin ${BRANCH}
 }
 
-checkout
+merge () {
+  checkout master
+
+  git merge $BRANCH
+
+  checkout $BRANCH
+}
+
+checkout $BRANCH
 commit
 
-inotifywait -m ./ -e CLOSE_WRITE -e CREATE |
+#inotifywait -m ./ -e CLOSE_WRITE -e CREATE |
+(inotifywait -m ./ -e CLOSE_WRITE -e CREATE & cat) |
   while read path action file; do
     echo "$path" "$action" "$file"
 
-    commit
+    case $path in
+      ":m") merge    ;;
+         *) commit   ;;
+    esac
+
   done
 

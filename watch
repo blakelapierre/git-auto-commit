@@ -46,7 +46,7 @@ commit
          *)
           if [ $SUSPEND -eq 0 ]
           then
-            echo "CCC committing"
+            echo "CCC committing $SUSPEND"
             commit
           fi
             ;;

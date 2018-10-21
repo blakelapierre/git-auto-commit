@@ -22,12 +22,10 @@ commit () {
 }
 
 merge () {
-  SUSPEND=1
   checkout master
   git merge --no-gpg-sign $BRANCH
   git push origin master
   checkout $BRANCH
-  SUSPEND=0
 }
 
 checkout $BRANCH
@@ -43,7 +41,9 @@ commit
       ":m")
 
           echo "MMM merging"
+          SUSPEND=1
           merge
+          SUSPEND=0
             ;;
 
          *)

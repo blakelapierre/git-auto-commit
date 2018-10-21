@@ -26,10 +26,7 @@ merge () {
   checkout master
   git merge $BRANCH
   checkout $BRANCH
-<<<<<<< HEAD
-=======
   SUSPEND=0
->>>>>>> autosave
 }
 
 checkout $BRANCH

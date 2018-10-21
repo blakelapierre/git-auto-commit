@@ -19,6 +19,7 @@ commit () {
 
 merge () {
   checkout master
+<<<<<<< HEAD
 
   git merge $BRANCH
 
@@ -28,6 +29,13 @@ merge () {
 checkout $BRANCH
 commit
 
+=======
+}
+
+checkout $BRANCH
+commit
+
+>>>>>>> autosave
 #inotifywait -m ./ -e CLOSE_WRITE -e CREATE |
 (inotifywait -m ./ -e CLOSE_WRITE -e CREATE & cat) |
   while read path action file; do

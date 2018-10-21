@@ -42,8 +42,16 @@ commit
     echo "$path" "$action" "$file"
 
     case $path in
-      ":m") merge    ;;
-         *) commit   ;;
+      ":m")
+
+          echo "MMM merging"
+          merge
+            ;;
+
+         *)
+          echo "CCC committing"
+          commit
+            ;;
     esac
 
   done

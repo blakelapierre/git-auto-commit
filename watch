@@ -25,6 +25,7 @@ merge () {
   SUSPEND=1
   checkout master
   git merge $BRANCH
+  git push origin master
   checkout $BRANCH
   SUSPEND=0
 }
